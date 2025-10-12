@@ -1,0 +1,67 @@
+ใช้ import เพื่อเอาฟังก์ชันจากไฟล์อื่นมาใช้
+let quotes = [] เอาไว้รอเก็บ
+
+
+ใช้ document.getElementById() เพื่อเข้าถึงแต่ละตัว
+
+ฟังก์ชัน createQuoteElement(quote)
+รับ qoute เป็น parameter
+const div = document.createElement('div') เพื่อสร้าง <div></div> แล้วตั้ง id เป็น strig ที่เป็น id ของ qoute
+const content = document.createElement('p') แล้วใช้ textContent เพื่อเขียนข้อมความ
+const editBtn = document.createElement('button') เพื่อสร้างปุ่ม edit ตั้ง class เป็น edit-btn , type เป็น button , เพิ่มข้อความ edit
+const delBtn = document.createElement('button') ทำแบบเดียวกับ edit แต่เป็น delete
+เพิ่มอันที่สร้างขึ้นมาไปเป็นลูกของ <div></div>
+
+ฟังก์ชัน clearList
+เคลียร์ qouteList ให้ว่างด้วยการใช้ innerHTML = ''
+
+ฟังก์ชัน addQuoteToDOM(quote)
+สร้างตัวแปรเพื่อเรียกใช้ฟังก์ชัน createQuoteElement(quote)
+quoteList.appendChild(el) เพิ่มไปเป็นลูกของ qouteList
+
+ฟังก์ชัน updateQuoteInDOM(quote)
+const el = quoteList.querySelector(`div[data-id="${quote.id}"]`) เพื่อหา id ที่ตรงกัน
+if (!el) return ถ้าไม่อันที่ตรงกันก็จะจบการทำงาน
+const ps = el.getElementsByTagName('p') เข้าถึง p ที่อยู่ใต้ el โดยตรง
+if (ps[0]) ps[0].textContent = quote.content เช็คเพื่อวาง content อันใหม่
+if (ps[1]) ps[1].textContent = quote.author เช็คเพื่อวาง author อันใหม่
+
+ฟังก์ชัน deleteQuoteFromDOM(id)
+const el = quoteList.querySelector(`div[data-id="${id}"]`) เพื่อหา id ที่ตรงกัน
+if (el && el.parentNode) el.parentNode.removeChild(el) ลบทุกอย่างออกจาก qoute และ DOM
+
+ฟังก์ชัน renderQuotes()
+quotes = getAllQuotes() เอาทุก qoute ที่เจอไปเก็บไว้ใน qoutes
+ใช้ฟังก์ชัน clearList() 
+if (!quotes.length) เช็คความยาวของ qoutes ถ้าไม่มีให้สร้าง p แล้วเพิ่มข้อความ แล้วก็เพิ่ม p ไปเป็นลูกของ qouteList
+
+const fragment = document.createDocumentFragment() เพื่อเก็บค่าแบบไม่ถาวร
+วนลูป qoutes และใช้ createQuoteElement(q) เพื่อสร้าง qoute ใหม่แล้วเพิ่มไปเป็นลูกของ fragment
+quoteList.appendChild(fragment) เอา fragment ไปเป็นลูกของ qouteList
+
+ฟังก์ชัน showRandomQuote()
+const list = getAllQuotes() เอาทุก qoute ที่เจอไปเก็บไว้ใน list
+randomDisplay.textContent = '' แสดงข้อความว่าง
+if (!list.length) เช็คถ้าไม่มีให้แสดงข้อความแล้วจบการทำงาน
+const rand = list[Math.floor(Math.random() * list.length)] เพื่อสุ่มเลขแล้วเอาไปแทนตำแหน่งของ qoute แล้วเอาออกมาแสดง
+
+
+form.addEventListener เพิ่ม Event ของ form เป็น submit
+e.preventDefault() เพื่อไม่ให้หน้าเว็บเปลี่ยนเมื่อเกิดการเปลี่ยนแปลง
+สร้างตัวแปรเพื่อเก็บค่าที่รับเข้ามาจาก form ด้วยการใช้ .value.trim()
+if (!content || !author) return ถ้าไม่เจอ content , author จะจบการทำงาน
+if (idRaw) เช็ค id ใช้ Number เพื่อเปลี่ยนให้เป็นตัวเลข
+const updated = updateQuote(id, content, author) ใช้ฟังก์ชันเพื่อ update แล้วใส่ parameter เป็นค่าที่รับมาจาก form
+if (updated) ถ้า update ได้ให้ไป update ใน updateQuoteInDOM(updated) ด้วย
+ถ้าไม่ได้ให้ใช้ฟังก์ชัน renderQuotes()
+ถ้าไม่ใช่ id สร้าง const created = addQuote(content, author) เพื่อเพิ่มอันใหม่
+if (created) addQuoteToDOM(created) ถ้าสร้างได้ก็ให้ทำในอีกฟังก์ชันด้วย
+form.reset() เพื่อ reset form ให้ว่าง
+
+quoteList.addEventListener เพิ่ม Event qouteList เป็น click
+if (!(target instanceof HTMLElement)) return ถ้าไม่ใช่ก็จะจบการทำงาน
+if (target.classList.contains('edit-btn')) ถ้าเป็น class edit-btn จะทำงานในนี้ เรียกใช้ฟังก์ชัน getAllQuotes() แล้วใช้ find เพื่อหา id ที่ตรงกัน แล้ว update อันใหม่
+if (target.classList.contains('delete-btn')) ถ้าเป็น class delete-btn จะเรียกใช้ฟังก์ชัน deleteQuote(id) เพื่อลบ
+if (idx !== -1) ถ้าลบได้ให้ไปลบใน deleteQuoteFromDOM(id)
+
+randomBtn.addEventListener('click', showRandomQuote) คลิกปุ่ม random แล้วจะไปทำงานฟังก์ชัน showRandomQuote

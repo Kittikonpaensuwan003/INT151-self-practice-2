@@ -1,0 +1,24 @@
+ให้ chatgpt อธิบายเกี่ยวกับโจทย์ที่ยังไม่ค่อยเข้าใจ
+
+const demoEl = document.getElementById("demo")
+เข้าถึง id demo
+
+let firstElement = document.createElement("p")
+let secondElement = document.createElement("p")
+let thirdElement = document.createElement("p")
+สร้าง <p></p> 3 ตัวเพื่อรอใส่ค่า
+
+firstElement.setAttribute("format","italic")
+secondElement.setAttribute("format","italic")
+thirdElement.setAttribute("format","italic")
+ใช้ setAttribute เพื่อตั้ง format ให้ <p></p> ใช้ italic เพื่อทำให้เป็นตัวเอียง
+
+firstElement.innerHTML = '<i>Sample italic Text</i>'
+secondElement.innerText = '<i>Sample italic Text</i>'
+thirdElement.textContent = '<i>Sample italic Text</i>'
+เพิ่มข้อความให้แต่ละอันให้อยู่ในรูปแบบของ html
+
+demoEl.appendChild(firstElement)
+demoEl.appendChild(secondElement)
+demoEl.appendChild(thirdElement)
+เพิ่มทุกตัวที่ตั้งให้เป็นตัวเอียงแล้วเข้าไปเป็นลูกของ demo

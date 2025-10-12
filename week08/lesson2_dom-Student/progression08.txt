@@ -1,0 +1,14 @@
+ใช้ import เพื่อเอาฟังก์ชันจากไฟล์อื่นมาใช้
+เข้าถึง id ของ qouteList
+
+ในฟังก์ชัน rederQoute
+เช็คว่า qouteList มีข้อมูลไหม
+สร้างตัวแปรแล้วใช้ฟังก์ชั่น getAllQuotes() แล้วใช้ innerHTML เพื่อให้เป็นค่าว่าง
+เช็คความยาวของตัวแปรที่ใช้ฟังก์ชัน ถ้าไม่มีจะใช้ createElement เพื่อสร้าง <p></p> แล้วใช้ textContent เพื่อแสดงข้อความแล้วเพิ่มไปเป็นลูกของ <p></p> แล้วจบการทำงานของฟังก์ชัน
+
+สร้างตัวแปรเพื่อรอเก็บค่าแบบไม่ถาวร ใช้ createDocumentFragment()
+วนลูป ใน all แล้ว createElement('p') ตั้ง className เป็น 'quote-item' 
+p.textContent = q.author ? `${q.content} — ${q.author}` : q.content จะโชว์ content และ author
+แล้วเพิ่ม p ไปเป็นลูกของ frag
+
+เพิ่ม frag ไปเป็นลูกของ qouteList
