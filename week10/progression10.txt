@@ -71,3 +71,40 @@ resetBtn.addEventListener('click', () => {
   localStorage.clear() เพื่อล้างทุกค่าที่เก็บเอามาไว้
   กำหนด default ของแต่ละอันให้ตรงกับที่ต้องการ
   แล้วแทนที่ค่าปัจจุบันด้วย default ที่ตั้งเอาไว้
+
+-----------------------------------------------------------------------------------------
+
+ฟังก์ชัน loadQuotes()
+ใช้ try catch เพื่อป้องกันการเกิดความผิดพลาด
+
+const quote = localStorage.getItem('quote')
+สร้างตัวแปรที่เก็บค่าที่เคยบันทึกไว้ 
+
+const parse = JSON.parse(quote)
+แปลง JSON เป็น array แล้วมาเก็บในตัวแปร
+
+if (!Array.isArray(parse)) return
+ทำการเช็คว่าเป็น array ไหม
+
+ใช้ for...of เพื่อลูปค่าทุกตัว
+ทำการเช็คว่าได้มี content author ไหม ถ้าไม่มีก็จบการทำงาน
+เรียกฟังก์ชัน addQuotes 
+
+quotes = getAllQuotes()
+นำ array ของ quotes มาแทนด้วยค่าที่มีในปัจจบัน โดยเรียกจากฟังก์ชัน getAllQuote
+
+renderQuotes() เรียกใช้ฟังก์ชัน
+
+ฟังก์ชัน saveQuotes()
+
+const quote = getAllQuotes() 
+สร้างตัวแปรเพื่อเก็บค่าปัจจุบันของแต่ละอัน
+
+if(quote.length === 0) localStorage.remove('quote')
+ทำการเช็คว่ามี quote ไหมถ้าไม่มีก็เคลียร์ storage ที่มี key quote
+
+const parsedData = JSON.stringify(quote)
+แปลง JSON เป็น string แล้วมาเก็บในตัวแปร
+
+localStorage.setItem('quote', parsedData)
+บันทึกข้อมูลลงใน storage
