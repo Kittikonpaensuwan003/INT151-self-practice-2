@@ -1,0 +1,73 @@
+เพิ่ม event โดยใช้ DOMContentLoaded เพื่อรอ DOM ถูกสร้างให้หมดก่อนแล้วค่อยเอามาเข้า event
+
+const bgColor = document.getElementById('bgColor')
+const fontColor = document.getElementById('fontColor')
+const fontSize = document.getElementById('fontSize')
+const saveBtn = document.getElementById('saveBtn')
+const resetBtn = document.getElementById('resetBtn')
+เข้าถึง id ของแต่ละอัน
+
+const savedBg = localStorage.getItem('bgColor')
+const savedFontColor = localStorage.getItem('fontColor')
+const savedFontSize = localStorage.getItem('fontSize')
+สร้างตัวแปรที่เก็บค่าที่เคยบันทึกไว้ ถ้าไม่มีจะเป็น null
+
+if (savedBg) {
+        document.body.style.backgroundColor = savedBg
+    }
+  if (savedFontColor) 
+    {
+        document.body.style.color = savedFontColor
+    }
+  if (savedFontSize) {
+        document.body.style.fontSize = savedFontSize
+    }
+ถ้ามีค่าที่บันทึกไว้ จะเอามาแทนที่ตัวปัจจุบันโดยจะเอามาเท่ากับค่าที่บันทึก
+
+if (savedBg) {
+        bgColor.value = savedBg
+    }
+  if (savedFontColor) {
+        fontColor.value = savedFontColor
+    }
+  if (savedFontSize) {
+        fontSize.value = savedFontSize
+    }
+ถ้ามีจะเอาไปแทนที่ตัวเดิมโดยจะเข้าถึง value ของที่เก็บไว้ แล้วเอาไปแทนอันหลัก
+
+saveBtn.addEventListener('click', () => {
+    const bgValue = bgColor.value;
+    const fontValue = fontColor.value
+    const sizeValue = fontSize.value
+
+    localStorage.setItem('bgColor', bgValue)
+    localStorage.setItem('fontColor', fontValue)
+    localStorage.setItem('fontSize', sizeValue)
+
+    document.body.style.backgroundColor = bgValue
+    document.body.style.color = fontValue
+    document.body.style.fontSize = sizeValue
+
+  })
+
+  ใช้ event กับ saveBtn เพื่อจะเขียนฟังก์ชั่นเมื่อเกิดการ click
+  สร้างตัวแปรเพื่อเก็บค่าปัจจุบันของแต่ละอัน
+  ใช้ setItem เก็บค่าลงใน localStorage
+  แล้วเปลี่ยน style ของแต่ละอันตาม value ปัจจุบัน
+
+resetBtn.addEventListener('click', () => {
+    localStorage.clear()
+
+    document.body.style.backgroundColor = 'white'
+    document.body.style.color = 'black'
+    document.body.style.fontSize = 'medium'
+
+    bgColor.value = '#ffffff'
+    fontColor.value = '#000000'
+    fontSize.value = 'medium'
+
+  })    
+  ใช้ event กับ resetBtn เพื่อจะเขียนฟังก์ชั่นเมื่อเกิดการ click
+  localStorage.clear() เพื่อล้างทุกค่าที่เก็บเอามาไว้
+  กำหนด default ของแต่ละอันให้ตรงกับที่ต้องการ
+  แล้วแทนที่ค่าปัจจุบันด้วย default ที่ตั้งเอาไว้

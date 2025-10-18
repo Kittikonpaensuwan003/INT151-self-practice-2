@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>Web Setting Form</title>
+  <style>
+    body {
+      background-color: white;
+      color: black;
+      font-size: medium;
+      font-family: sans-serif;
+    }
+    .container {
+      width: 300px;
+      margin: 50px auto;
+      text-align: center;
+      border: 1px solid #ccc;
+      padding: 20px;
+      border-radius: 8px;
+    }
+    label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+    select, input {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 10px;
+    }
+    button {
+      margin: 5px;
+      padding: 5px 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>ตั้งค่าหน้าเว็บ</h2>
+
+    <label for="bgColor">Background Color</label>
+    <input type="color" id="bgColor">
+
+    <label for="fontColor">Font Color</label>
+    <input type="color" id="fontColor">
+
+    <label for="fontSize">Font Size</label>
+    <select id="fontSize">
+      <option value="small">Small</option>
+      <option value="medium" selected>Medium</option>
+      <option value="large">Large</option>
+    </select>
+
+    <div>
+      <button id="saveBtn">Save</button>
+      <button id="resetBtn">Reset</button>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
